@@ -1,4 +1,6 @@
-variable "vpc_cidr" {}
+variable "vpc_cidr" {
+  type = sting
+}
 variable "public_subnet_cidrs" {
   type = list(string)
 }
