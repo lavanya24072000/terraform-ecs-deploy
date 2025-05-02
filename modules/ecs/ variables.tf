@@ -1,4 +1,4 @@
-variables.tf (ECS)
+
 variable "cluster_id" {}
 variable "subnet_ids" {
   type = list(string)
