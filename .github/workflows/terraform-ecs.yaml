@@ -1,0 +1,73 @@
+name: Terraform ECS Deployment
+
+on:
+  pull_request:
+    paths:
+      - "terraform/**"
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v2
+
+      - name: Terraform fmt check
+        run: terraform fmt -check
+
+      - name: Checkov Scan
+        uses: bridgecrewio/checkov-action@v2
+        with:
+          directory: terraform
+
+  plan_apply:
+    needs: lint
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v2
+
+      - name: Terraform Init
+        run: terraform init
+        # run: terraform init -backend-config=backend.hcl
+
+      - name: Terraform Plan
+        run: terraform plan -var-file=envs/dev/main.tfvars
+
+      - name: Terraform Apply
+        run: terraform apply -auto-approve -var-file=envs/dev/main.tfvars
+
+  # deploy:
+  #   needs: plan_apply
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Checkout code
+  #       uses: actions/checkout@v3
+
+  #     - name: AWS OIDC authentication
+  #       uses: aws-actions/configure-aws-credentials@v1
+  #       with:
+  #         role-to-assume: ${{ secrets.AWS_ACCOUNT_ID }}
+  #         aws-region: us-east-1
+
+  #     - name: ECS Deployment
+  #       run: |
+  #         ecs-cli configure --region ap-south-1 --access-key ${{ secrets.AWS_ACCESS_KEY_ID }} --secret-key ${{ secrets.AWS_SECRET_ACCESS_KEY }} --cluster ecs-cluster-dev
+  #         ecs-cli compose --file docker-compose.yml --project-name ecs-fargate up
+
+  # notify:
+  #   needs: deploy
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Send Slack notification
+  #   uses: slackapi/slack-github-action@v1.22.0
+  #   with:
+  #     slack_message: "Deployment completed successfully!"
+  #     slack_webhook_url: ${{ secrets.SLACK_WEBHOOK_URL }}
+
