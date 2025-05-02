@@ -36,6 +36,13 @@ jobs:
         uses: hashicorp/setup-terraform@v3
         with:
           terraform_version: 1.10.5
+          
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          role-to-assume: ${{ secrets.AWS_ACCOUNT_ID }}
+          aws-region: us-east-1
+ 
 
       - name: Terraform Init
         working-directory: ./terraform/
