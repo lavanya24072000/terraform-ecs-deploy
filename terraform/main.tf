@@ -1,12 +1,12 @@
 module "vpc" {
-  source               = "./modules/vpc"
+  source               = "../modules/vpc"
   vpc_cidr             = var.vpc_cidr
   public_subnet_cidrs  = var.public_subnet_cidrs
   azs                  = var.azs
 }
 
 module "alb" {
-  source            = "./modules/alb"
+  source            = "../modules/alb"
   alb_name          = "${var.env}-alb"
   subnet_ids = module.vpc.public_subnet_ids
   vpc_id            = module.vpc.vpc_id
@@ -15,7 +15,7 @@ module "alb" {
 }
  
 module "ecs" {
-  source            = "./modules/ecs"
+  source            = "../modules/ecs"
   cluster_id        = module.ecs_cluster.id
   vpc_id            = module.vpc.vpc_id
   public_subnet_ids = module.vpc.public_subnet_ids
