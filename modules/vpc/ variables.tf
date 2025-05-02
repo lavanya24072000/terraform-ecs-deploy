@@ -1,5 +1,5 @@
 variable "vpc_cidr" {
-  type = sting
+  type = string
 }
 variable "public_subnet_cidrs" {
   type = list(string)
