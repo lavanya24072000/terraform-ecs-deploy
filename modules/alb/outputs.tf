@@ -17,6 +17,3 @@ output "tomcat_tg_arn" {
 output "apache_tg_arn" {
   value = aws_lb_target_group.apache.arn
 }
-output "alb_dns" {
-  value =  aws_lb.this.alb_dns
-}
