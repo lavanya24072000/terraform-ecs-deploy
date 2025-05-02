@@ -9,12 +9,7 @@ resource "aws_subnet" "public" {
   availability_zone = element(var.azs, count.index)
   map_public_ip_on_launch = true
 }
-resource "aws_vpc" "main" {
-  cidr_block = var.vpc_cidr
-  tags = {
-    Name = "main-vpc"
-  }
-}
+
  
 resource "aws_internet_gateway" "gw" {
 vpc_id = aws_vpc.main.id
