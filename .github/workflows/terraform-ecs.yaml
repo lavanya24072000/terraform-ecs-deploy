@@ -1,5 +1,4 @@
 name: Terraform ECS Deployment
-
 on:
   push:
   
