@@ -16,7 +16,7 @@ module "alb" {
  
 module "ecs" {
   source            = "../modules/ecs"
-  cluster_id        = module.ecs_cluster.id
+  cluster_id        = var.cluster_name
   subnet_ids = module.vpc.public_subnet_ids
   security_group_id = var.alb_sg_id
   nginx_tg_arn      = module.alb.nginx_tg_arn
