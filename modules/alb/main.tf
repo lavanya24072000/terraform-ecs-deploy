@@ -3,7 +3,7 @@ resource "aws_lb" "this" {
   internal           = false
   load_balancer_type = "application"
   subnets            = var.subnet_ids
-  security_groups    = var.security_group_id
+  security_groups    = [var.security_group_id]
 }
  
 # Target Group: Nginx
