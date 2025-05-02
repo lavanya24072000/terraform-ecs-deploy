@@ -11,7 +11,6 @@ module "alb" {
   subnet_ids = module.vpc.public_subnet_ids
   vpc_id            = module.vpc.vpc_id
    security_group_id = var.alb_sg_id
-   env               = var.env
 }
  
 module "ecs" {
