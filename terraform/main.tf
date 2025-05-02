@@ -22,5 +22,5 @@ module "ecs" {
   nginx_tg_arn      = module.alb.nginx_tg_arn
   tomcat_tg_arn     = module.alb.tomcat_tg_arn
   apache_tg_arn     = module.alb.apache_tg_arn
- 
+  env               = var.env
 }
