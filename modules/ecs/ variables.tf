@@ -4,7 +4,7 @@ variable "subnet_ids" {
   type = list(string)
 }
 variable "security_group_id" {
-type = string
+type = list(string)
 }
 variable "nginx_tg_arn" {}
 variable "tomcat_tg_arn"{}
