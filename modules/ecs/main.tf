@@ -58,7 +58,7 @@ resource "aws_ecs_service" "nginx" {
  
   network_configuration {
     subnets         = var.subnet_ids
-    security_groups = var.security_group_id
+    security_groups = [var.security_group_id]
     assign_public_ip = true
   }
  
@@ -79,7 +79,7 @@ resource "aws_ecs_service" "tomcat" {
  
   network_configuration {
     subnets         = var.subnet_ids
-    security_groups = var.security_group_id
+    security_groups = [var.security_group_id]
     assign_public_ip = true
   }
  
@@ -100,7 +100,7 @@ resource "aws_ecs_service" "apache" {
  
   network_configuration {
     subnets         = var.subnet_ids
-    security_groups = var.security_group_id
+    security_groups = [var.security_group_id]
     assign_public_ip = true
   }
  
