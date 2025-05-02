@@ -7,3 +7,4 @@ variable "security_group_id" {}
 variable "nginx_tg_arn" {}
 variable "tomcat_tg_arn"{}
 variable "apache_tg_arn"{}
+variable "env" {}
