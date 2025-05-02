@@ -4,3 +4,4 @@ azs = ["us-east-1a", "us-east-1b", "us-east-1c"]
 alb_name = "demo-alb-dev"
 cluster_name = "ecs-cluster-dev"
 alb_sg_id = "sg-07c12a43b9ec5e3b6"
+env=dev
