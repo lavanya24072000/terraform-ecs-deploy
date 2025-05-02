@@ -36,6 +36,7 @@ jobs:
         uses: hashicorp/setup-terraform@v2
 
       - name: Terraform Init
+        working-directory: ./terraform/
         run: terraform init
         # run: terraform init -backend-config=backend.hcl
 
